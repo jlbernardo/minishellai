@@ -12,15 +12,10 @@
 
 #include "minishell.h"
 
-static int	tc_putchar(int c)
-{
-	return (write(1, &c, 1));
-}
-
 static void	load_caps(t_term *term)
 {
-	char	*area;
-	char	buf[2048];
+	char		*area;
+	static char	buf[2048];
 
 	area = buf;
 	term->ce = tgetstr("ce", &area);
@@ -66,30 +61,4 @@ void	disable_raw_mode(t_term *term)
 {
 	if (term->init)
 		tcsetattr(STDIN_FILENO, TCSANOW, &term->orig);
-}
-
-void	tc_clear_line(t_term *term, int prompt_len, int line_len)
-{
-	int	i;
-
-	(void)prompt_len;
-	if (term->cr)
-		tputs(term->cr, 1, tc_putchar);
-	else
-		write(1, "\r", 1);
-	if (term->ce)
-		tputs(term->ce, 1, tc_putchar);
-	else
-	{
-		i = 0;
-		while (i < prompt_len + line_len + 1)
-		{
-			write(1, " ", 1);
-			i++;
-		}
-		if (term->cr)
-			tputs(term->cr, 1, tc_putchar);
-		else
-			write(1, "\r", 1);
-	}
 }

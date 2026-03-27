@@ -113,7 +113,6 @@ t_cmd_group	*parse(t_token *tokens)
 	tail = NULL;
 	while (tokens)
 	{
-		parse_pipeline(tokens, &grp);
 		tokens = parse_pipeline(tokens, &grp);
 		if (tail)
 			tail->next = grp;

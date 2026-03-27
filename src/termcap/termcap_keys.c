@@ -164,17 +164,8 @@ static char	*read_line_raw(t_shell *shell)
 	shell->hist_cur = NULL;
 	while (1)
 	{
-		g_signal = 0;
 		if (read(STDIN_FILENO, &c, 1) <= 0)
 		{
-			if (g_signal == SIGINT)
-			{
-				line.buf[0] = '\0';
-				line.len = 0;
-				line.pos = 0;
-				refresh_line(&line, &shell->term);
-				continue ;
-			}
 			free(line.buf);
 			return (NULL);
 		}
