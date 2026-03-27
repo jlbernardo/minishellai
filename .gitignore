@@ -1,0 +1,15 @@
+# Object files
+*.o
+
+# Archive files
+*.a
+
+# Binary
+minishell
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
